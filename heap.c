@@ -17,7 +17,12 @@
  */
 void heapSort(Employee *A, int n)
 {
-	// TODO - BuildHeap on the heap
+	buildHeap(A, n);
+	while(n > 0){
+		swap(&A[0], &A[n-1]);
+		heapify(A, 0, n-1);
+		n--;
+	}
 
 	// TODO - while n > 0:
 	// TODO - swap A[n-1] with A[0], since A[0] is the smallest number.
@@ -95,5 +100,6 @@ void swap(Employee *e1, Employee *e2)
  */
 void printList(Employee *A, int n)
 {
-	
+	for(int i = 0; i < n; i++)
+		printf("[id=%s sal=%d]", A[i].name, A[i].salary);
 }
