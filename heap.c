@@ -42,6 +42,7 @@ void buildHeap(Employee *A, int n)
 {
 	for(int i = (int)n/2; i >=0; i--)
 		heapify(A, i, n);
+	printList(A, n);
 }
 
 /**
