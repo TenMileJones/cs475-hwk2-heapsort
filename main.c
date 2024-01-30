@@ -12,10 +12,10 @@ int main(int argc, char *argv[])
 		int money = 0;
 		printf("\n\nName: ");
         scanf("%s", str);
-		printf("\nSalary: ");
-		scanf("%d", money);
+		printf("Salary: ");
+		scanf("%d", &money);
 		Employee e;
-		e.name[MAX_NAME_LEN] = str;
+		e.name[MAX_NAME_LEN] = *str;
 		e.salary = money;
 		A[i] = e;
 	}
