@@ -1,8 +1,8 @@
 /*
  * heapsort.c
  *
- *  Created on: Jul 1, 2013
- *      Author:
+ *  Created on: 1/29/24
+ *      Author: Branson Jones
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,7 +35,8 @@ void heapSort(Employee *A, int n)
  */
 void buildHeap(Employee *A, int n)
 {
-	// TODO - heapify() every element from A[n/2] down-to A[0]
+	for(int i = (int)n/2; i >=0; i--)
+		heapify(A, i, n);
 }
 
 /**
@@ -48,15 +49,31 @@ void buildHeap(Employee *A, int n)
  */
 void heapify(Employee *A, int i, int n)
 {
-	// TODO - get index of left child of element i
-	// TODO - get index of right child of element i
-
-	// TODO - determine which child has a smaller salary. We'll call the index of this
-	//		element: "smaller"
-
-	// TODO - recursively check if the salary at A[i] > the salary at A[smaller]. If it is, swap the two.
-	//			Then recursively heapify A[smaller].
-	// TODO - Continue recursion as long as i is within range AND either right_child and left_child are still within range.
+	int leftChild = 2*(i+1)-1;
+	int rightChild = 2*(i+1);
+	int smaller;
+	//set index to 0 if child index is out of bounds
+	//0 means false
+	if(leftChild >= n)
+		leftChild = 0;
+	if(rightChild >= n)
+		rightChild = 0;
+	//determine index of smaller
+	if(!leftChild){
+		smaller = -1;
+	} else if(leftChild && !rightChild){
+		smaller = leftChild;
+	} else if(rightChild && A[leftChild].salary > A[rightChild].salary){
+		smaller = leftChild;
+	} else {
+		smaller = rightChild;
+	}
+	//check if swaps are necessary, and execute them if so
+	if(smaller != -1 && A[i].salary > A[smaller].salary){
+		swap(&A[i], &A[smaller]);
+		//recurse
+		heapify(&A[smaller], smaller, n);
+	}
 }
 
 /**
@@ -66,15 +83,17 @@ void heapify(Employee *A, int i, int n)
  */
 void swap(Employee *e1, Employee *e2)
 {
-	// TODO
+	Employee tmp = *e1;
+	*e1 = *e2;
+	*e2 = tmp;
 }
 
 /**
- * Outputs an array of Employees
+ * Outputs a string representation of the array of Employees
  * @param	*A	Pointer to the list of employees
  * @param	n	Size of the list
  */
 void printList(Employee *A, int n)
 {
-	// TODO
+	
 }
