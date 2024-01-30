@@ -20,8 +20,8 @@ void heapSort(Employee *A, int n)
 	buildHeap(A, n);
 	while(n > 0){
 		swap(&A[0], &A[n-1]);
-		heapify(A, 0, n-1);
 		n--;
+		heapify(A, 0, n-1);
 	}
 
 	// TODO - while n > 0:
@@ -101,5 +101,5 @@ void swap(Employee *e1, Employee *e2)
 void printList(Employee *A, int n)
 {
 	for(int i = 0; i < n; i++)
-		printf("[id=%s sal=%d]", A[i].name, A[i].salary);
+		printf("[id=%s sal=%d] ", A[i].name, A[i].salary);
 }
