@@ -59,26 +59,27 @@ void heapify(Employee *A, int i, int n)
 	int rightChild = 2*(i+1);
 	int smaller;
 	//set index to 0 if child index is out of bounds
-	//0 means false
 	if(leftChild >= n)
 		leftChild = 0;
 	if(rightChild >= n)
 		rightChild = 0;
 	//determine index of smaller
 	if(!leftChild){
-		smaller = -1;
-	} else if(leftChild && !rightChild){
+		//node is leaf
+		return;
+	} else if(!rightChild){
+		//node only has left child
 		smaller = leftChild;
-	} else if(rightChild && A[leftChild].salary > A[rightChild].salary){
+	} else if(A[leftChild].salary < A[rightChild].salary){
 		smaller = leftChild;
 	} else {
 		smaller = rightChild;
 	}
 	//check if swaps are necessary, and execute them if so
-	if(smaller != -1 && A[i].salary > A[smaller].salary){
+	if(A[i].salary > A[smaller].salary){
 		swap(&A[i], &A[smaller]);
 		//recurse
-		heapify(&A[smaller], smaller, n);
+		heapify(A, smaller, n);
 	}
 }
 
